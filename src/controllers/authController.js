@@ -27,7 +27,7 @@ const signin = async (req, res, next) => {
 		const { email, password } = req.body;
 		
 		const result = await authService.signin(email, password);
-		// console.log(result)
+		console.log(result)
 		return res.json(result);
 	} catch (error) {
 		if (error.message === "User not found") {

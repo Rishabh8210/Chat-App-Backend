@@ -2,7 +2,11 @@ const express = require("express");
 const cors = require('cors')
 const { PORT, SYNC } = require("./config/serverConfig");
 const {setupDB} = require('./config/dbConfig')
-const io = require('socket.io')(8000, {
+const http = require('http')
+const app = express();
+const server = http.createServer(app)
+const socketIo = require('socket.io')
+const io = socketIo(server, {
 	cors: {
         origin: 'https://chat-application-assignment.vercel.app',
         methods: ['GET', 'POST'],
@@ -18,7 +22,6 @@ const db = require('./models/index');
 setupDB();
 
 
-const app = express();
 app.use(express.json());
 app.use(express.text());
 app.use(express.urlencoded({ extended: true }));
@@ -66,7 +69,7 @@ io.on('connection', socket => {
 	})
 })
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
 	// if(SYNC){
 	// 	db.sequelize.sync({alter: true})
 	// }
