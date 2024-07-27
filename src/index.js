@@ -8,7 +8,7 @@ const server = http.createServer(app)
 const socketIo = require('socket.io')
 const io = socketIo(server, {
 	cors: {
-        origin: 'https://chat-application-assignment.vercel.app',
+        origin: 'https://convocave.vercel.app/',
         methods: ['GET', 'POST'],
         allowedHeaders: ['my-custom-header'],
         credentials: true
